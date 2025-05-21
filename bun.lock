@@ -71,7 +71,7 @@
       "dependencies": {
         "@neondatabase/serverless": "^1.0.0",
         "drizzle-orm": "^0.43.1",
-        "drizzle-zod": "^0.7.1",
+        "drizzle-zod": "^0.8.1",
         "zod": "^3.25.17",
       },
       "devDependencies": {
@@ -694,7 +694,7 @@
 
     "drizzle-seed": ["drizzle-seed@0.3.1", "", { "dependencies": { "pure-rand": "^6.1.0" }, "peerDependencies": { "drizzle-orm": ">=0.36.4" }, "optionalPeers": ["drizzle-orm"] }, "sha512-F/0lgvfOAsqlYoHM/QAGut4xXIOXoE5VoAdv2FIl7DpGYVXlAzKuJO+IphkKUFK3Dz+rFlOsQLnMNrvoQ0cx7g=="],
 
-    "drizzle-zod": ["drizzle-zod@0.7.1", "", { "peerDependencies": { "drizzle-orm": ">=0.36.0", "zod": ">=3.0.0" } }, "sha512-nZzALOdz44/AL2U005UlmMqaQ1qe5JfanvLujiTHiiT8+vZJTBFhj3pY4Vk+L6UWyKFfNmLhk602Hn4kCTynKQ=="],
+    "drizzle-zod": ["drizzle-zod@0.8.1", "", { "peerDependencies": { "drizzle-orm": ">=0.36.0", "zod": "^3.25.1" } }, "sha512-k2/2cwBz3Vjb7CWPVCeMNajZpG43V7SqhNrZ8LsWJOz8TztQ5YtU2ifgnfnxqZXsxeHmdQnsl6eXm7GwDZnq/Q=="],
 
     "eastasianwidth": ["eastasianwidth@0.2.0", "", {}, "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA=="],
 
