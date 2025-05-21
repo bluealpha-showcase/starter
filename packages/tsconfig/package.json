@@ -1,0 +1,9 @@
+{
+  "name": "@starter/tsconfig",
+  "type": "module",
+  "exports": {
+    ".": "./src/base.json",
+    "./app": "./src/app.json",
+    "./node": "./src/node.json"
+  }
+}

@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build
+.turbo/
+dist/
+
+# Environment
+.env*
+
+# Wrangler
+.wrangler/
+.dev.vars*
+
+# Terraform
+.terraform/

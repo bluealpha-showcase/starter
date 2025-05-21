@@ -1,0 +1,14 @@
+{
+  "name": "@starter/api",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@starter/exception": "workspace:*",
+    "hono": "^4.7.10"
+  }
+}

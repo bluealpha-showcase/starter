@@ -1,0 +1,1 @@
+Fixes STA-1, STA-2 and STA-3

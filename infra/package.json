@@ -1,0 +1,13 @@
+{
+  "name": "@starter/infra",
+  "type": "module",
+  "scripts": {
+    "init": "terraform init",
+    "validate": "terraform validate",
+    "plan": "terraform plan",
+    "apply": "terraform apply",
+    "apply:auto": "terraform apply -auto-approve",
+    "destroy": "terraform destroy",
+    "destroy:auto": "terraform destroy -auto-approve"
+  }
+}

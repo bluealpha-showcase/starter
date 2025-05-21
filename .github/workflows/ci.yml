@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ['develop', 'main']
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
+          
+      - name: Install Dependencies
+        run: bun install
+        
+      - name: Deploy Dry Development
+        if: github.ref == 'refs/heads/develop'
+        run: bun turbo run deploy:dry:dev
+
+      - name: Deploy Dry Production
+        if: github.ref == 'refs/heads/main'
+        run: bun turbo run deploy:dry:prod

@@ -1,0 +1,55 @@
+{
+  "name": "@starter/app",
+  "type": "module",
+  "imports": {
+    "#*": "./*/index.ts",
+    "#api/env": "./api/env.ts"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:dev": "CLOUDFLARE_ENV=development vite",
+    "dev:prod": "CLOUDFLARE_ENV=production vite",
+    "build": "vite build",
+    "build:dev": "CLOUDFLARE_ENV=development vite build",
+    "build:prod": "CLOUDFLARE_ENV=production vite build",
+    "preview": "vite preview",
+    "preview:dev": "vite preview",
+    "preview:prod": "vite preview",
+    "deploy:dry:dev": "wrangler deploy --dry-run",
+    "deploy:dry:prod": "wrangler deploy --dry-run",
+    "deploy:dev": "wrangler deploy",
+    "deploy:prod": "wrangler deploy",
+    "typegen": "wrangler types",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@hono/zod-validator": "^0.5.0",
+    "@starter/api": "workspace:*",
+    "@starter/auth": "workspace:*",
+    "@starter/db": "workspace:*",
+    "@starter/email": "workspace:*",
+    "@starter/exception": "workspace:*",
+    "@starter/ui": "workspace:*",
+    "@tanstack/react-form": "^1.11.2",
+    "@tanstack/react-query": "^5.76.1",
+    "@tanstack/react-query-devtools": "^5.76.1",
+    "@tanstack/react-router": "^1.120.5",
+    "@tanstack/react-router-devtools": "^1.120.6",
+    "hono": "^4.7.10",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.7",
+    "zod": "^3.25.17"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.2.3",
+    "@tailwindcss/vite": "^4.1.7",
+    "@tanstack/router-plugin": "^1.120.5",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react-swc": "^3.9.0",
+    "vite": "^6.3.5",
+    "wrangler": "^4.16.0"
+  }
+}

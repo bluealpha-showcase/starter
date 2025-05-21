@@ -1,0 +1,7 @@
+{
+  "extends": "@starter/tsconfig/app",
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.tmp/tsconfig.app.tsbuildinfo"
+  },
+  "include": ["app", "worker-configuration.d.ts"]
+}

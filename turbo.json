@@ -1,0 +1,126 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "CLOUDFLARE_ACCOUNT_ID",
+    "CLOUDFLARE_API_TOKEN",
+    "DATABASE_URL",
+    "GITHUB_CLIENT_ID",
+    "GITHUB_CLIENT_SECRET",
+    "RESEND_API_KEY",
+    "TF_API_TOKEN",
+    "TURBO_TEAM",
+    "TURBO_TOKEN"
+  ],
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "with": ["@starter/db#studio"]
+    },
+    "dev:dev": {
+      "cache": false,
+      "persistent": true,
+      "with": ["@starter/db#studio"],
+      "env": ["CLOUDFLARE_ENV=development"]
+    },
+    "dev:prod": {
+      "cache": false,
+      "persistent": true,
+      "with": ["@starter/db#studio"],
+      "env": ["CLOUDFLARE_ENV=production"]
+    },
+    "typegen": {
+      "inputs": ["wrangler.jsonc"],
+      "outputs": ["worker-configuration.d.ts"]
+    },
+    "typecheck": {
+      "dependsOn": ["typegen", "^typecheck"]
+    },
+    "build": {
+      "dependsOn": ["//#check:ci", "typecheck", "^build"],
+      "outputs": ["dist/**"]
+    },
+    "build:dev": {
+      "dependsOn": ["//#check:ci", "typecheck", "^build:dev"],
+      "outputs": ["dist/**"],
+      "env": ["CLOUDFLARE_ENV=development"]
+    },
+    "build:prod": {
+      "dependsOn": ["//#check:ci", "typecheck", "^build:prod"],
+      "outputs": ["dist/**"],
+      "env": ["CLOUDFLARE_ENV=production"]
+    },
+    "preview": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["build"]
+    },
+    "preview:dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["build:dev"]
+    },
+    "preview:prod": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["build:prod"]
+    },
+    "deploy:dry:dev": {
+      "cache": false,
+      "dependsOn": ["build:dev", "@starter/infra#plan", "^deploy:dry:dev"]
+    },
+    "deploy:dry:prod": {
+      "cache": false,
+      "dependsOn": ["build:prod", "@starter/infra#plan", "^deploy:dry:prod"]
+    },
+    "deploy:dev": {
+      "cache": false,
+      "dependsOn": [
+        "deploy:dry:dev",
+        "@starter/infra#apply:auto",
+        "@starter/db#push:force",
+        "^deploy:dev"
+      ]
+    },
+    "deploy:prod": {
+      "cache": false,
+      "dependsOn": [
+        "deploy:dry:prod",
+        "@starter/infra#apply:auto",
+        "@starter/db#push:force",
+        "^deploy:prod"
+      ]
+    },
+    "@starter/infra#init": {
+      "cache": false,
+      "inputs": ["**/*.tf"],
+      "outputs": [".terraform/**", ".terraform.lock.hcl"]
+    },
+    "@starter/infra#validate": {
+      "cache": false,
+      "inputs": ["**/*.tf"],
+      "dependsOn": ["@starter/infra#init"]
+    },
+    "@starter/infra#plan": {
+      "cache": false,
+      "inputs": ["**/*.tf"],
+      "dependsOn": ["@starter/infra#validate"]
+    },
+    "@starter/infra#apply:auto": {
+      "cache": false,
+      "dependsOn": ["@starter/infra#plan"]
+    },
+    "@starter/db#push:force": {
+      "cache": false
+    },
+    "@starter/db#studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "//#check": {
+      "cache": false
+    },
+    "//#check:ci": {}
+  }
+}

@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@source "../../../packages/ui";
+@theme {
+  --font-sans: Inter, sans-serif;
+  --font-sans--font-feature-settings: "cv11";
+}

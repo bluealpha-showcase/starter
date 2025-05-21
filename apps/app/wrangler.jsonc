@@ -1,0 +1,55 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "app",
+  "main": "api/index.ts",
+  "compatibility_date": "2025-04-28",
+  "assets": { "not_found_handling": "single-page-application" },
+  "placement": { "mode": "smart" },
+  "observability": { "enabled": true },
+  "vars": { "BASE_URL": "http://localhost:5173", "ENVIRONMENT": "local" },
+  "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "bucket-local" }],
+  "unsafe": {
+    "bindings": [
+      {
+        "name": "AUTH_RATE_LIMITER",
+        "type": "ratelimit",
+        "namespace_id": "101",
+        "simple": { "limit": 100, "period": 60 }
+      }
+    ]
+  },
+  "env": {
+    "development": {
+      "name": "app-development",
+      "route": { "pattern": "dev.starter.samyvs.com", "custom_domain": true },
+      "vars": { "BASE_URL": "https://dev.starter.samyvs.com", "ENVIRONMENT": "development" },
+      "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "bucket-dev" }],
+      "unsafe": {
+        "bindings": [
+          {
+            "name": "AUTH_RATE_LIMITER",
+            "type": "ratelimit",
+            "namespace_id": "102",
+            "simple": { "limit": 100, "period": 60 }
+          }
+        ]
+      }
+    },
+    "production": {
+      "name": "app-production",
+      "route": { "pattern": "starter.samyvs.com", "custom_domain": true },
+      "vars": { "BASE_URL": "https://starter.samyvs.com", "ENVIRONMENT": "production" },
+      "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "bucket-prod" }],
+      "unsafe": {
+        "bindings": [
+          {
+            "name": "AUTH_RATE_LIMITER",
+            "type": "ratelimit",
+            "namespace_id": "103",
+            "simple": { "limit": 100, "period": 60 }
+          }
+        ]
+      }
+    }
+  }
+}

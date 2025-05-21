@@ -1,0 +1,24 @@
+{
+  "name": "@starter/auth",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*/index.ts"
+  },
+  "imports": {
+    "#*": "./src/*/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@oslojs/crypto": "^1.0.1",
+    "@oslojs/encoding": "^1.1.0",
+    "arctic": "^3.7.0"
+  },
+  "peerDependencies": {
+    "@starter/db": "workspace:*",
+    "@starter/exception": "workspace:*",
+    "hono": "^4.7.10",
+    "zod": "^3.25.17"
+  }
+}

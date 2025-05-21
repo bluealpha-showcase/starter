@@ -1,0 +1,41 @@
+name: CD
+
+on:
+  push:
+    branches: ['develop', 'main']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
+
+      - name: Install Dependencies
+        run: bun install
+        
+      - name: Deploy Development
+        if: github.ref == 'refs/heads/develop'
+        run: bun turbo run deploy:dev
+        env:
+          DATABASE_URL: ${{ secrets.DEVELOPMENT_DATABASE_URL }}
+
+      - name: Deploy Production
+        if: github.ref == 'refs/heads/main'
+        run: bun turbo run deploy:prod
+        env:
+          DATABASE_URL: ${{ secrets.PRODUCTION_DATABASE_URL }}

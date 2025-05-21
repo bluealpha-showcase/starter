@@ -1,0 +1,29 @@
+{
+  "name": "@starter/db",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*/index.ts"
+  },
+  "imports": {
+    "#*": "./src/*/index.ts",
+    "#env": "./src/env.ts"
+  },
+  "scripts": {
+    "push": "drizzle-kit push",
+    "push:force": "drizzle-kit push --force",
+    "studio": "drizzle-kit studio",
+    "seed": "bun src/seed",
+    "reset": "bun src/reset",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "drizzle-orm": "^0.43.1",
+    "drizzle-zod": "^0.7.1",
+    "zod": "^3.25.17"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.1",
+    "drizzle-seed": "^0.3.1"
+  }
+}
